@@ -824,29 +824,43 @@ function returnToMenu() {
 
 // ============ CONTROLS ============
 function setupControls() {
+
   // Keyboard
   window.addEventListener('keydown', (ev) => {
     if (ev.repeat || state.gameState !== 'playing') return;
-    
+
     const k = ev.key.toLowerCase();
+
+    // 🔒 BLOQUEIA SCROLL DO NAVEGADOR
+    if (["arrowleft","arrowright","arrowup","arrowdown"," "].includes(k)) {
+      ev.preventDefault();
+    }
+
     state.keys[k] = true;
-    
+
     const speed = state.player.moveSpeed;
-    
+
     if (k === 'arrowleft' || k === 'a') state.player.vx = -speed;
     if (k === 'arrowright' || k === 'd') state.player.vx = speed;
     if (k === 'arrowup' || k === 'w') state.player.vy = -speed;
     if (k === 'arrowdown' || k === 's') state.player.vy = speed;
-    
+
     if (k === 'e' || k === ' ') interact();
-  });
-  
+
+  }, { passive: false });
+
+
   window.addEventListener('keyup', (ev) => {
     if (state.gameState !== 'playing') return;
-    
+
     const k = ev.key.toLowerCase();
+
+    if (["arrowleft","arrowright","arrowup","arrowdown"," "].includes(k)) {
+      ev.preventDefault();
+    }
+
     delete state.keys[k];
-    
+
     if (k === 'arrowleft' || k === 'a') {
       if (!state.keys['arrowright'] && !state.keys['d']) state.player.vx = 0;
     }
@@ -859,52 +873,57 @@ function setupControls() {
     if (k === 'arrowdown' || k === 's') {
       if (!state.keys['arrowup'] && !state.keys['w']) state.player.vy = 0;
     }
-  });
-  
-  // Action button click
+
+  }, { passive: false });
+
+
+  // Action button
   actionBtn.addEventListener('click', interact);
-  
+
   // Dialog dismiss
   dialogEl.addEventListener('click', closeDialog);
-  
-  // Touch controls
-  let touching = false;
+
+
+  // ===== TOUCH CONTROLS =====
   canvas.addEventListener('touchstart', (e) => {
     if (state.gameState !== 'playing') return;
-    touching = true;
+    e.preventDefault();
     updateTouchMovement(e);
-  });
-  
+  }, { passive: false });
+
   canvas.addEventListener('touchmove', (e) => {
     if (state.gameState !== 'playing') return;
     e.preventDefault();
     updateTouchMovement(e);
+  }, { passive: false });
+
+  canvas.addEventListener('touchend', () => {
+    state.player.vx = 0;
+    state.player.vy = 0;
   });
-  
+
+
   function updateTouchMovement(e) {
     const touch = e.touches[0];
     const rect = canvas.getBoundingClientRect();
+
     const relX = (touch.clientX - rect.left) / rect.width;
     const relY = (touch.clientY - rect.top) / rect.height;
-    
+
     const speed = state.player.moveSpeed;
-    
+
     if (relX < 0.35) state.player.vx = -speed;
     else if (relX > 0.65) state.player.vx = speed;
     else state.player.vx = 0;
-    
+
     if (relY < 0.35) state.player.vy = -speed;
     else if (relY > 0.65) state.player.vy = speed;
     else state.player.vy = 0;
   }
-  
-  canvas.addEventListener('touchend', () => {
-    touching = false;
-    state.player.vx = 0;
-    state.player.vy = 0;
-  });
 }
 
+
+// ============ DIALOG ============
 function closeDialog() {
   state.showDialog = false;
   dialogEl.classList.add('hidden');
