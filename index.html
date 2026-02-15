@@ -36,7 +36,15 @@
 </head>
 
 <body>
-  <!-- GLOBAL VOLUME CONTROL -->
+
+  <div id="app">
+
+    <!-- FULLSCREEN BUTTON -->
+    <div class="fullscreen-btn" id="fullscreenBtn" title="Maximizar">
+      ⛶
+    </div>
+
+    <!-- GLOBAL VOLUME CONTROL -->
     <div class="volume-control global-volume">
       <label for="globalVolumeSlider">🔊</label>
       <input
@@ -48,10 +56,8 @@
         class="volume-slider"
       >
     </div>
-  <div id="app">
 
     
-
     <!-- MAIN MENU -->
     <div id="mainMenu" class="menu-container">
       <div id="eventLog" class="event-log hidden"></div>
@@ -213,3 +219,4 @@
   <script src="main.js"></script>
 </body>
 </html>
+
