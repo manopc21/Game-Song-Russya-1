@@ -2,28 +2,67 @@
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>Legend of Russya: Song of the Frozen Realm</title>
   <link rel="stylesheet" href="styles.css">
+
+  <style>
+    /* GLOBAL VOLUME (FIXED TOP) */
+    .global-volume {
+      position: fixed;
+      top: 10px;
+      right: 15px;
+      z-index: 9999;
+
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      background: rgba(0, 0, 0, 0.6);
+      padding: 6px 10px;
+      border-radius: 10px;
+    }
+
+    .global-volume label {
+      color: #fff;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    .volume-slider {
+      width: 100px;
+    }
+  </style>
 </head>
+
 <body>
+  <!-- GLOBAL VOLUME CONTROL -->
+    <div class="volume-control global-volume">
+      <label for="globalVolumeSlider">🔊</label>
+      <input
+        type="range"
+        id="globalVolumeSlider"
+        min="0"
+        max="100"
+        value="50"
+        class="volume-slider"
+      >
+    </div>
   <div id="app">
+
+    
+
     <!-- MAIN MENU -->
     <div id="mainMenu" class="menu-container">
-      <!-- EVENT LOG (MENU ONLY) -->
       <div id="eventLog" class="event-log hidden"></div>
-      
-      <!-- VOLUME CONTROL (MENU) -->
-      <div class="volume-control menu-volume">
-        <label for="menuVolumeSlider">🔊</label>
-        <input type="range" id="menuVolumeSlider" min="0" max="100" value="50" class="volume-slider">
-      </div>
-      
+
       <div class="menu-content">
         <h1 class="menu-title">🎵 Russya 🎵</h1>
         <p class="menu-subtitle">Song of the Frozen Realm</p>
-        <p class="menu-objective">Collect 6 magical notes and deliver them to the Sacred Microphone to restore harmony.</p>
-        
+        <p class="menu-objective">
+          Collect 6 magical notes and deliver them to the Sacred Microphone to restore harmony.
+        </p>
+
         <div class="menu-buttons">
           <button id="playBtn" class="menu-btn">🎮 PLAY</button>
           <button id="storyBtn" class="menu-btn">📖 STORY</button>
@@ -37,13 +76,26 @@
         <button class="modal-close">&times;</button>
         <h2>📖 The Story</h2>
         <div class="story-text">
-          <p>Long ago, in a frozen kingdom called <strong>Russya</strong>, a legendary singer known as <strong>"Voice of the North"</strong> created powerful melodies that maintained the balance between humans, spirits, and nature.</p>
-          
-          <p>After her mysterious disappearance, her songs fragmented into <strong>6 magical musical notes</strong> that scattered throughout the kingdom.</p>
-          
-          <p>Now, an ancient cult called <strong>"The Silent Echo"</strong> tries to erase all music from the world through silence. You are a young adventurer blessed with musical magic.</p>
-          
-          <p><strong>Your mission:</strong> Find the 6 musical notes and deliver them to the <strong>Sacred Microphone</strong> in the heart of the kingdom to restore lost harmony.</p>
+          <p>
+            Long ago, in a frozen kingdom called <strong>Russya</strong>, a legendary singer known as
+            <strong>"Voice of the North"</strong> created powerful melodies that maintained the balance
+            between humans, spirits, and nature.
+          </p>
+
+          <p>
+            After her mysterious disappearance, her songs fragmented into
+            <strong>6 magical musical notes</strong> that scattered throughout the kingdom.
+          </p>
+
+          <p>
+            Now, an ancient cult called <strong>"The Silent Echo"</strong> tries to erase all music
+            from the world through silence. You are a young adventurer blessed with musical magic.
+          </p>
+
+          <p>
+            <strong>Your mission:</strong> Find the 6 musical notes and deliver them to the
+            <strong>Sacred Microphone</strong> in the heart of the kingdom to restore lost harmony.
+          </p>
         </div>
         <button id="backToMenuBtn" class="menu-btn">Back</button>
       </div>
@@ -52,19 +104,17 @@
     <!-- GAME CONTAINER -->
     <div id="gameContainer" class="game-container hidden">
       <div class="game-title">🎵 Legend of Russya 🎵</div>
-      
+
       <div class="app-wrapper">
         <div class="game-viewport" id="viewport">
           <canvas id="gameCanvas"></canvas>
           <div id="dialog" class="hidden overlay"></div>
+
           <div id="hud" class="hud">
             <div class="hud-location">Crystal Forest</div>
-            <div class="hud-objective" id="hudObjective">Find 6 musical notes</div>
-          </div>
-          <!-- VOLUME CONTROL (INSIDE VIEWPORT) -->
-          <div class="volume-control">
-            <label for="gameVolumeSlider">🔊</label>
-            <input type="range" id="gameVolumeSlider" min="0" max="100" value="50" class="volume-slider">
+            <div class="hud-objective" id="hudObjective">
+              Find 6 musical notes
+            </div>
           </div>
         </div>
 
@@ -73,19 +123,29 @@
             <div id="playerCircle" class="player-circle-display"></div>
             <div id="charInfo">
               <div id="charName">Adventurer</div>
+
               <div class="stat-line">
                 <span class="label">HP:</span>
-                <div class="bar hp"><div class="fill" id="hpFill"></div></div>
+                <div class="bar hp">
+                  <div class="fill" id="hpFill"></div>
+                </div>
                 <span id="hpText">100/100</span>
               </div>
+
               <div class="stat-line">
                 <span class="label">MP:</span>
-                <div class="bar mp"><div class="fill" id="mpFill"></div></div>
+                <div class="bar mp">
+                  <div class="fill" id="mpFill"></div>
+                </div>
                 <span id="mpText">50/50</span>
               </div>
-              <div class="stat-line musical" id="songFragments">🎵 0/6</div>
+
+              <div class="stat-line musical" id="songFragments">
+                🎵 0/6
+              </div>
             </div>
           </div>
+
           <div class="actions">
             <div class="action-info">
               <div id="nearbyEntity" class="nearby"></div>
@@ -100,8 +160,12 @@
     <div id="victoryScreen" class="hidden">
       <div class="victory-content">
         <h1>🎉 VICTORY! 🎉</h1>
-        <p class="victory-message">THANK YOU FOR DELIVERING THE MUSIC TO KONSANTINO OUSSALENKO</p>
-        <p class="victory-subtitle">You have restored the harmony of Russya!</p>
+        <p class="victory-message">
+          THANK YOU FOR DELIVERING THE MUSIC TO KONSANTINO OUSSALENKO
+        </p>
+        <p class="victory-subtitle">
+          You have restored the harmony of Russya!
+        </p>
         <button id="menuBtn" class="menu-btn">Back to Menu</button>
       </div>
     </div>
@@ -110,18 +174,42 @@
     <div id="gameOverScreen" class="hidden">
       <div class="game-over-content">
         <h1>💀 DEFEAT 💀</h1>
-        <p class="game-over-message">You were defeated by the power of darkness...</p>
-        <p class="game-over-subtitle">The music of Russya remains lost.</p>
-        <button id="gameOverMenuBtn" class="menu-btn">Back to Menu</button>
+        <p class="game-over-message">
+          You were defeated by the power of darkness...
+        </p>
+        <p class="game-over-subtitle">
+          The music of Russya remains lost.
+        </p>
+        <button id="gameOverMenuBtn" class="menu-btn">
+          Back to Menu
+        </button>
       </div>
     </div>
+
   </div>
-  
+
   <!-- BACKGROUND MUSIC -->
   <audio id="bgMusic" loop>
     <source src="music.mp3" type="audio/mpeg">
   </audio>
-  
+
+  <!-- GLOBAL VOLUME SCRIPT -->
+  <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const bgMusic = document.getElementById("bgMusic");
+    const volumeSlider = document.getElementById("globalVolumeSlider");
+
+    if (bgMusic && volumeSlider) {
+      bgMusic.volume = volumeSlider.value / 100;
+
+      volumeSlider.addEventListener("input", () => {
+        bgMusic.volume = volumeSlider.value / 100;
+      });
+    }
+  });
+  </script>
+
+
   <script src="main.js"></script>
 </body>
 </html>
