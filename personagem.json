@@ -1,0 +1,102 @@
+{
+  "gameInfo": {
+    "title": "Legend of Russya: Song of the Frozen Realm",
+    "genre": "2D RPG Adventure / Fantasy / Music-Based Magic",
+    "version": "1.0",
+    "lore": "Long ago, a legendary singer known as Russya, the Voice of the North, created powerful melodies that kept balance between humans, spirits, and nature. After her mysterious disappearance, her songs shattered into magical fragments. An ancient cult called The Silent Echo seeks to erase all music and control the world through silence.",
+    "mainObjectives": [
+      "Explore frozen forests, ruined concert halls, crystal caverns, and abandoned villages",
+      "Collect Song Fragments to unlock new abilities and story chapters",
+      "Defeat enemies corrupted by silence and shadow",
+      "Prevent The Silent Echo from destroying all music",
+      "Uncover the truth behind Russya's legend"
+    ]
+  },
+
+  "player": {
+    "id": "player_001",
+    "nome": "Aventureiro da Voz Perdida",
+    "classe": "Mago Musical",
+    "raça": "Humana",
+    "nível": 1,
+    "experiência": 0,
+    "biografia": "Um jovem aventureiro agraciado com magia musical, capaz de transformar melodias em feitiços.",
+    "aparência": {
+      "visual": "Bolinha Amarela Brilhante",
+      "cor": "#fde047",
+      "brilho": "Aura mágica roxa ao redor",
+      "tamanho": "Médio"
+    },
+    "atributos": {
+      "força": 8,
+      "agilidade": 12,
+      "resistência": 10,
+      "inteligência": 14,
+      "percepção": 12,
+      "carisma": 11,
+      "harmonia_musical": 15
+    },
+    "status": {
+      "vida_max": 100,
+      "vida_atual": 100,
+      "energia_max": 50,
+      "energia_atual": 50
+    },
+    "inventario": {
+      "fragmentos_canção": 0,
+      "itens": []
+    },
+    "localizacao_inicial": {
+      "mapa": "Floresta Cristalina",
+      "x": 200,
+      "y": 300
+    }
+  },
+
+  "npcs": [
+    {
+      "id": "npc_bardo_001",
+      "nome": "Lyric, o Bardo Errante",
+      "tipo": "Bardo",
+      "localização": "Vilarejo Abandonado",
+      "descrição": "Um bardo viajante que conhece histórias sobre as canções perdidas.",
+      "diálogo": "Ouvi uma melodia antiga no vento...",
+      "oferece": "Dicas sobre fragmentos"
+    }
+  ],
+
+  "inimigos": [
+    {
+      "id": "enemy_silence_001",
+      "nome": "Criatura Silenciosa",
+      "tipo": "Shadow Beast",
+      "vida": 20,
+      "ataque": 8,
+      "defesa": 5,
+      "drop_rate": 0.3,
+      "drop": "fragmento_canção",
+      "descrição": "Criatura corrompida pela ausência de som."
+    }
+  ],
+
+  "bosses": [
+    {
+      "id": "boss_001",
+      "nome": "Eco Silencioso",
+      "localização": "Templo Esquecido",
+      "vida": 150,
+      "ataque": 20,
+      "defesa": 15,
+      "descrição": "Manifestação física do culto The Silent Echo."
+    }
+  ],
+
+  "regioes": [
+    {
+      "id": "region_forest",
+      "nome": "Floresta Cristalina",
+      "descrição": "Uma floresta antiga coberta de neve eterna.",
+      "clima": "Nevado, Frio"
+    }
+  ]
+}
