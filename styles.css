@@ -1,25 +1,26 @@
 :root{--bg:#0a1929;--accent:#60a5fa;--accent-2:#3b82f6;--text:#ffffff;--muted:#cbd5e1;--frost:#e0f2fe;--aurora:#c084fc}
 *{box-sizing:border-box;margin:0;padding:0}
 html, body {
+  margin: 0;
+  padding: 0;
+
   height: 100vh;
   width: 100vw;
+
   background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
   color: var(--text);
   font-family: 'Arial', sans-serif;
-  overflow: hidden;
-}  
+
+  overflow: hidden;      /* bloqueia scroll */
+  touch-action: none;    /* bloqueia gesto no mobile */
+}
 
   /* ================= GLOBAL VOLUME FIXED ================= */
 .global-volume {
-  position: fixed;
+  position: absolute;
   top: 10px;
-  right: 15px;
-  z-index: 9999;
-}
-
-  top: 10px;
-  right: 15px;
-  z-index: 9999;
+  right: 10px;
+  z-index: 50;
 
   display: flex;
   align-items: center;
@@ -30,7 +31,8 @@ html, body {
   border-radius: 8px;
   border: 1px solid rgba(96, 165, 250, 0.4);
   backdrop-filter: blur(8px);
-  }
+}
+
   
   height: 100vh;
   width: 100vw;
@@ -38,7 +40,7 @@ html, body {
   color: var(--text);
   font-family: 'Arial', sans-serif;
   overflow: hidden;
-}
+
 .app {
   height: 100vh;
   width: 100vw;
