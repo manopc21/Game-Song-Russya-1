@@ -982,4 +982,15 @@ function gameLoop(now) {
   }
 }
 
-init();
+init();   // sua inicialização do jogo
+
+
+// ===============================
+// BLOQUEIA ARRASTAR TELA MOBILE
+// ===============================
+window.addEventListener("touchmove", function(e) {
+  if (state.gameState === "playing") {
+    e.preventDefault();
+  }
+}, { passive: false });
+
